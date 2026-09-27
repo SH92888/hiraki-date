@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>お出かけアンケート</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#222;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{width:min(100%,420px);background:#fff;border-radius:24px;padding:30px 22px;box-shadow:0 10px 30px #00000012;text-align:center}
+h1{font-size:26px;margin:0 0 10px;line-height:1.5}.sub{color:#777;font-size:14px;margin:0 0 25px}
+button{display:block;width:100%;border:0;border-radius:15px;padding:17px;margin:10px 0;font-size:18px;font-weight:700;cursor:pointer}
+.yes{background:#111;color:#fff}.hai{background:#eee;color:#111}
+.hidden{display:none!important}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.date input{display:none}.date label{display:block;padding:15px 5px;border:2px solid #ddd;border-radius:13px;font-weight:700;cursor:pointer}
+.date input:checked+label{background:#111;color:#fff;border-color:#111}
+.error{color:#d00;font-size:13px;font-weight:700;display:none;margin-bottom:12px}
+.ok{font-size:58px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div id="q1">
+<h1>平木と出掛けてくれる？</h1>
+<p class="sub">正直に選んでね☺️</p>
+<button class="yes" type="button" onclick="showDates()">YES</button>
+<button class="hai" type="button" onclick="showDates()">はい</button>
+</div>
+
+<div id="q2" class="hidden">
+<h1>行ける日付を選択してね</h1>
+<p class="sub">複数選択できます</p>
+<div class="dates">
+<label class="date"><input type="checkbox"><span>10月1日</span></label>
+<label class="date"><input type="checkbox"><span>10月2日</span></label>
+<label class="date"><input type="checkbox"><span>10月9日</span></label>
+<label class="date"><input type="checkbox"><span>10月10日</span></label>
+<label class="date"><input type="checkbox"><span>10月13日</span></label>
+<label class="date"><input type="checkbox"><span>10月14日</span></label>
+<label class="date"><input type="checkbox"><span>10月19日</span></label>
+<label class="date"><input type="checkbox"><span>10月20日</span></label>
+<label class="date"><input type="checkbox"><span>10月25日</span></label>
+<label class="date"><input type="checkbox"><span>10月26日</span></label>
+</div>
+<div id="error" class="error">行ける日付を1つ以上選んでね！</div>
+<button class="yes" type="button" onclick="submitDates()">決定</button>
+</div>
+
+<div id="done" class="hidden">
+<div class="ok">✓</div>
+<h1>ありがとう！</h1>
+<p class="sub">回答を受け付けました。</p>
+</div>
+
+</div>
+<script>
+function showDates(){
+  document.getElementById("q1").classList.add("hidden");
+  document.getElementById("q2").classList.remove("hidden");
+}
+function submitDates(){
+  const checked=document.querySelectorAll('#q2 input:checked');
+  if(checked.length===0){
+    document.getElementById("error").style.display="block";
+    return;
+  }
+  document.getElementById("q2").classList.add("hidden");
+  document.getElementById("done").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
